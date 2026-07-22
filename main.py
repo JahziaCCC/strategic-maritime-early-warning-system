@@ -1,55 +1,19 @@
-from datetime import datetime
+"""
+Strategic Maritime Early Warning System
+Main Controller
+"""
 
 from intelligence.maritime_engine import generate_maritime_assessment
-
-
-SYSTEM_NAME = "Strategic Maritime Early Warning System"
+from reports.executive_report import generate_report
 
 
 def main():
 
-    print("=" * 70)
-    print(SYSTEM_NAME)
-    print("Executive Maritime Intelligence Report")
-    print("=" * 70)
-
-    print()
-    print("Report Time:")
-    print(datetime.now())
-
-    print()
-
-
     assessments = generate_maritime_assessment()
 
-
-    for item in assessments:
-
-        print("📍", item["zone"])
-        print("------------------------------")
-
-        print(
-            "Detected Vessels:",
-            item["vessel_count"]
-        )
-
-        print(
-            "Oil Tankers:",
-            item["oil_tankers"]
-        )
-
-        print(
-            "Risk Score:",
-            item["risk_score"],
-            "/100"
-        )
-
-        print(
-            "Risk Level:",
-            item["risk_level"]
-        )
-
-        print("==============================")
+    generate_report(
+        assessments
+    )
 
 
 if __name__ == "__main__":
