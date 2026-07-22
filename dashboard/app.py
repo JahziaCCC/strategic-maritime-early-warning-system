@@ -98,3 +98,90 @@ st.subheader("Risk Overview")
 st.bar_chart(
     df.set_index("zone")["risk_score"]
 )
+import folium
+from streamlit_folium import st_folium
+import json
+
+
+st.divider()
+
+st.subheader("🗺️ Maritime Chokepoints Map")
+
+
+# Load locations
+
+with open(
+    "data/chokepoint_locations.json",
+    "r",
+    encoding="utf-8"
+) as file:
+
+    locations = json.load(file)
+
+
+
+# Create map
+
+m = folium.Map(
+    location=[20, 45],
+    zoom_start=4
+)
+
+
+
+for item in assessments:
+
+    zone_name = item["zone"]
+
+    location = None
+
+
+    for key, value in locations.items():
+
+        if value["arabic_name"] == zone_name:
+            location = value
+            break
+
+
+    if location:
+
+        score = item["risk_score"]
+
+
+        if score < 30:
+            color = "green"
+
+        elif score < 70:
+            color = "orange"
+
+        else:
+            color = "red"
+
+
+
+        folium.Marker(
+
+            [
+                location["lat"],
+                location["lon"]
+            ],
+
+            popup=f"""
+            {zone_name}<br>
+            Risk: {score}/100<br>
+            Level: {item['risk_level']}
+            """,
+
+            icon=folium.Icon(
+                color=color
+            )
+
+        ).add_to(m)
+
+
+
+st_folium(
+    m,
+    width=1000,
+    height=600
+)
