@@ -2,59 +2,55 @@ import json
 from datetime import datetime
 
 from intelligence.risk_engine import calculate_risk, risk_level
+from intelligence.impact_analysis import analyze_impact
 from sources.ais_snapshot import get_vessel_data
-
-
-SYSTEM_NAME = "Strategic Maritime Early Warning System"
+from reports.executive_report import generate_report
 
 
 def load_chokepoints():
+
     with open("data/chokepoints.json", "r", encoding="utf-8") as file:
         return json.load(file)
 
 
 def main():
 
-    print("=" * 60)
-    print(SYSTEM_NAME)
-    print("=" * 60)
-
-    print()
-    print("🌐 Executive Maritime Intelligence Report")
-    print()
-
     data = load_chokepoints()
+
+    results = []
 
     for point in data["chokepoints"]:
 
         vessel_data = get_vessel_data(point["name"])
 
-        score = calculate_risk(
+        risk_score = calculate_risk(
             vessel_data["vessel_count"],
             vessel_data["abnormal_movements"],
             vessel_data["stopped_vessels"],
             0
         )
 
-        level = risk_level(score)
+        level = risk_level(risk_score)
 
-        print("📍", point["arabic_name"])
-        print("----------------------------")
+        impact = analyze_impact(
+            point["name"],
+            risk_score
+        )
 
-        print("Vessels:", vessel_data["vessel_count"])
-        print("Oil Tankers:", vessel_data["oil_tankers"])
-        print("Stopped Vessels:", vessel_data["stopped_vessels"])
+        results.append({
 
-        print()
-        print("Risk Score:", score, "/100")
-        print("Risk Level:", level)
+            "name": point["arabic_name"],
 
-        print("============================")
+            "risk_score": risk_score,
+
+            "risk_level": level,
+
+            "impact": impact
+
+        })
 
 
-    print()
-    print("Last Update:")
-    print(datetime.now())
+    generate_report(results)
 
 
 if __name__ == "__main__":
