@@ -1,6 +1,3 @@
-# Strategic Maritime Early Warning System
-# Initial Version
-
 from datetime import datetime
 
 SYSTEM_NAME = "Strategic Maritime Early Warning System"
