@@ -1,15 +1,9 @@
-"""
-Maritime Alert Engine
-Strategic Maritime Early Warning System
-"""
-
-
 def generate_alert(assessment):
 
     level = assessment["risk_level"]
 
 
-    if level == "LOW":
+    if level != "HIGH":
 
         return None
 
@@ -17,7 +11,7 @@ def generate_alert(assessment):
     impact = assessment["impact"]
 
 
-    alert = {
+    return {
 
         "title": "🚨 Maritime Early Warning Alert",
 
@@ -40,6 +34,3 @@ def generate_alert(assessment):
         "recommendation": impact["executive_note"]
 
     }
-
-
-    return alert
