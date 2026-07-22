@@ -1,6 +1,8 @@
 import json
 from datetime import datetime
 
+from intelligence.risk_engine import calculate_risk, risk_level
+
 
 SYSTEM_NAME = "Strategic Maritime Early Warning System"
 
@@ -17,23 +19,33 @@ def main():
     print("=" * 60)
 
     print()
-    print("🌐 Maritime Strategic Monitoring")
+    print("🌐 Executive Maritime Intelligence Report")
     print()
 
     data = load_chokepoints()
 
-    print(" monitored chokepoints:")
-    print()
-
     for point in data["chokepoints"]:
-        print(f"📍 {point['arabic_name']}")
-        print(f"   Region: {point['region']}")
-        print(f"   Importance: {point['importance']}")
-        print(f"   Risk Score: {point['risk_score']}/100")
-        print()
 
-    print("System Status:")
-    print("🟢 Operational")
+        # بيانات تجريبية مؤقتة
+        vessel_density = 50
+        abnormal_movements = 2
+        stopped_vessels = 3
+        security_events = 1
+
+        score = calculate_risk(
+            vessel_density,
+            abnormal_movements,
+            stopped_vessels,
+            security_events
+        )
+
+        level = risk_level(score)
+
+        print("📍", point["arabic_name"])
+        print("Risk Score:", score, "/100")
+        print("Level:", level)
+        print("-" * 40)
+
 
     print()
     print("Last Update:")
