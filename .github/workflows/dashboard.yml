@@ -13,15 +13,25 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
 
+
     - name: Check Dashboard
       run: |
         python -m py_compile dashboard/app.py
+
+
+    - name: Run Maritime Intelligence System
+      env:
+        AIS_API_KEY: ${{ secrets.AIS_API_KEY }}
+      run: |
+        python main.py
