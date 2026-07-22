@@ -1,0 +1,25 @@
+{
+  "chokepoints": [
+    {
+      "name": "Strait of Hormuz",
+      "arabic_name": "مضيق هرمز",
+      "region": "Arabian Gulf",
+      "importance": "Energy",
+      "risk_score": 0
+    },
+    {
+      "name": "Bab el Mandeb",
+      "arabic_name": "باب المندب",
+      "region": "Red Sea",
+      "importance": "Trade",
+      "risk_score": 0
+    },
+    {
+      "name": "Suez Canal",
+      "arabic_name": "قناة السويس",
+      "region": "Egypt",
+      "importance": "Global Shipping",
+      "risk_score": 0
+    }
+  ]
+}
