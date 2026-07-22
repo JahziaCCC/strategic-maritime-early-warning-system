@@ -1,0 +1,17 @@
+{
+  "Strait of Hormuz": {
+    "arabic_name": "مضيق هرمز",
+    "lat": 26.56,
+    "lon": 56.25
+  },
+  "Bab el Mandeb": {
+    "arabic_name": "باب المندب",
+    "lat": 12.58,
+    "lon": 43.35
+  },
+  "Suez Canal": {
+    "arabic_name": "قناة السويس",
+    "lat": 30.45,
+    "lon": 32.35
+  }
+}
