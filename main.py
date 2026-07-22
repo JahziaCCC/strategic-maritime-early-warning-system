@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 from intelligence.risk_engine import calculate_risk, risk_level
+from sources.ais_snapshot import get_vessel_data
 
 
 SYSTEM_NAME = "Strategic Maritime Early Warning System"
@@ -26,25 +27,29 @@ def main():
 
     for point in data["chokepoints"]:
 
-        # بيانات تجريبية مؤقتة
-        vessel_density = 50
-        abnormal_movements = 2
-        stopped_vessels = 3
-        security_events = 1
+        vessel_data = get_vessel_data(point["name"])
 
         score = calculate_risk(
-            vessel_density,
-            abnormal_movements,
-            stopped_vessels,
-            security_events
+            vessel_data["vessel_count"],
+            vessel_data["abnormal_movements"],
+            vessel_data["stopped_vessels"],
+            0
         )
 
         level = risk_level(score)
 
         print("📍", point["arabic_name"])
+        print("----------------------------")
+
+        print("Vessels:", vessel_data["vessel_count"])
+        print("Oil Tankers:", vessel_data["oil_tankers"])
+        print("Stopped Vessels:", vessel_data["stopped_vessels"])
+
+        print()
         print("Risk Score:", score, "/100")
-        print("Level:", level)
-        print("-" * 40)
+        print("Risk Level:", level)
+
+        print("============================")
 
 
     print()
