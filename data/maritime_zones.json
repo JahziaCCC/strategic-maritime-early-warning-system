@@ -1,0 +1,34 @@
+{
+  "zones": [
+    {
+      "name": "Strait of Hormuz",
+      "arabic_name": "مضيق هرمز",
+      "bbox": {
+        "min_lat": 25.0,
+        "max_lat": 27.0,
+        "min_lon": 55.0,
+        "max_lon": 57.5
+      }
+    },
+    {
+      "name": "Bab el Mandeb",
+      "arabic_name": "باب المندب",
+      "bbox": {
+        "min_lat": 12.0,
+        "max_lat": 13.5,
+        "min_lon": 42.0,
+        "max_lon": 44.5
+      }
+    },
+    {
+      "name": "Suez Canal",
+      "arabic_name": "قناة السويس",
+      "bbox": {
+        "min_lat": 29.5,
+        "max_lat": 31.5,
+        "min_lon": 32.0,
+        "max_lon": 33.5
+      }
+    }
+  ]
+}
