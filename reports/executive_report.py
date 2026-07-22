@@ -1,41 +1,80 @@
+"""
+Executive Report Generator
+Strategic Maritime Early Warning System
+"""
+
+
 from datetime import datetime
 
 
-def generate_report(results):
+def generate_report(assessments):
 
     print("=" * 70)
-    print("🌐 Strategic Maritime Early Warning System")
-    print("Executive Maritime Situation Report")
+
+    print("Strategic Maritime Early Warning System")
+
+    print("Executive Maritime Risk Report")
+
+    print("Report Time:", datetime.now())
+
     print("=" * 70)
 
-    print()
-    print("Report Time:")
-    print(datetime.now())
 
-    print()
+    for item in assessments:
 
-    for item in results:
+        print()
 
-        print("📍", item["name"])
-        print("-----------------------------")
+        print("📍", item["zone"])
 
-        print("Risk Score:",
-              item["risk_score"],
-              "/100")
+        print("-" * 40)
 
-        print("Risk Level:",
-              item["risk_level"])
+        print(
+            "Risk Level:",
+            item["risk_level"]
+        )
 
-        print("Energy Impact:",
-              item["impact"]["energy"])
+        print(
+            "Risk Score:",
+            item["risk_score"],
+            "/100"
+        )
 
-        print("Trade Impact:",
-              item["impact"]["trade"])
+        print(
+            "Detected Vessels:",
+            item["vessel_count"]
+        )
 
-        print("Supply Chain Impact:",
-              item["impact"]["supply_chain"])
+        print(
+            "Oil Tankers:",
+            item["oil_tankers"]
+        )
 
-        print("Recommendation:")
-        print(item["impact"]["recommendation"])
+        print()
+
+        print("Strategic Impact:")
+
+        impact = item["impact"]
+
+        print(
+            "Energy:",
+            impact["energy"]
+        )
+
+        print(
+            "Trade:",
+            impact["trade"]
+        )
+
+        print(
+            "Supply Chain:",
+            impact["supply_chain"]
+        )
+
+        print()
+
+        print(
+            "Recommendation:",
+            impact["executive_note"]
+        )
 
         print("=" * 70)
